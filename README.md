@@ -4,8 +4,8 @@
 
 Predicts whether a website visitor session will end in a purchase, and explains *why* using SHAP — built as an end-to-end ML project covering EDA, preprocessing, model comparison, explainability, and deployment.
 
-**Live app:** [[add your Streamlit Cloud link here once deployed]
-](https://online-shopping-intent-predictor-ngxme7ivmaef6xfbrrtjpx.streamlit.app/)
+**Live app:** 
+(https://online-shopping-intent-predictor-ngxme7ivmaef6xfbrrtjpx.streamlit.app/)
 ---
 
 ## Problem
