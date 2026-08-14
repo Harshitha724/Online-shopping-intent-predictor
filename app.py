@@ -15,6 +15,8 @@ import numpy as np
 import joblib
 import shap
 import matplotlib.pyplot as plt
+import os
+import urllib.request
 
 # =========================================================
 # 1. PAGE SETUP -- this just controls the browser tab title/layout
@@ -27,7 +29,24 @@ st.write(
 )
 
 # =========================================================
-# 2. LOAD THE SAVED MODEL + SHAP EXPLAINER (done once when app starts)
+# 2. DOWNLOAD LARGE FILES FROM GITHUB RELEASES (if not already present)
+# These files are too large for the normal repo, so they're hosted as
+# GitHub Release attachments instead. This downloads them once, the first
+# time the app runs, and reuses the local copy after that.
+# =========================================================
+MODEL_URL = "https://github.com/Harshitha724/Online-shopping-intent-predictor/releases/download/v1.0/final_model.pkl"
+EXPLAINER_URL = "https://github.com/Harshitha724/Online-shopping-intent-predictor/releases/download/v1.0/shap_explainer.pkl"
+
+def download_if_missing(url, filename):
+    if not os.path.exists(filename):
+        with st.spinner(f"Downloading {filename} (first run only)..."):
+            urllib.request.urlretrieve(url, filename)
+
+download_if_missing(MODEL_URL, "final_model.pkl")
+download_if_missing(EXPLAINER_URL, "shap_explainer.pkl")
+
+# =========================================================
+# 3. LOAD THE SAVED MODEL + SHAP EXPLAINER (done once when app starts)
 # =========================================================
 @st.cache_resource  # tells Streamlit: only load these once, not on every click
 def load_model_and_explainer():
